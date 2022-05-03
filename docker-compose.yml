@@ -2,6 +2,7 @@ version: '3'
 services:
   pawn-api:
     build: .
+    restart: always
     environment:
       - DATABASE_URL=postgres://postgres:postgres@postgres:5432/pawn?schema=public
     ports:

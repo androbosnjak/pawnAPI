@@ -6,5 +6,7 @@ COPY package.json .
 RUN yarn
 COPY . .
 
+RUN npx pm2 install typescript
+
 CMD [ "yarn", "start" ]
 
