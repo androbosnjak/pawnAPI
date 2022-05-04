@@ -5,7 +5,8 @@
   "main": "pm2 start app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx prisma migrate dev && pm2 start app.ts --attach"
+    "start": "npx prisma migrate dev && pm2 start app.ts --attach",
+    "build": "tsc"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
