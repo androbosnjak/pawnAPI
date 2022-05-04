@@ -9,10 +9,18 @@ const users = [
 
 export const seed = async () => {
   const prisma = new PrismaClient();
+
   try {
-    await prisma.customer.createMany({
-      data: users,
-    });
+    const numberOfCustomers = await prisma.customer.count();
+
+    //only add customers if table is empty
+    if (numberOfCustomers === 0) {
+      await prisma.customer.createMany({
+        data: users,
+      });
+    } else {
+      return;
+    }
   } catch (error) {
     console.error(error);
     throw error;
