@@ -4,32 +4,43 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 const router = Router();
 
+interface TypedRequestBody<T> extends Request {
+  body: T;
+}
+
 //submit pawn
-router.post('/', async (req: Request, res: Response, next: NextFunction) => {
-  const { sum, customerId } = req.body;
+router.post(
+  '/',
+  async (
+    req: TypedRequestBody<{ loanSum: number; customerId: number }>,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { loanSum, customerId } = req.body;
 
-  //sum must be over 100 to be accepted
-  if (sum < 100) {
-    return res.status(400).json({ error: 'loan sum must be at least 100' });
-  }
+    //sum must be over 100 to be accepted
+    if (loanSum < 100) {
+      return res.status(400).json({ error: 'loan sum must be at least 100' });
+    }
 
-  //submit pawn to database
-  try {
-    const pawn = await prisma.pawn.create({
-      data: {
-        loanSum: sum,
-        customer: {
-          connect: {
-            id: customerId,
+    //submit pawn to database
+    try {
+      const pawn = await prisma.pawn.create({
+        data: {
+          loanSum,
+          customer: {
+            connect: {
+              id: customerId,
+            },
           },
         },
-      },
-    });
+      });
 
-    res.status(201).json({ pawn });
-  } catch (error) {
-    res.status(500).json({ error });
+      res.status(201).json({ pawn });
+    } catch (error) {
+      res.status(500).json({ error });
+    }
   }
-});
+);
 
 export default router;
