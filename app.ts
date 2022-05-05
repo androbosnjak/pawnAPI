@@ -6,7 +6,7 @@ import pawnRoutes from './routes/pawn';
 import * as swaggerDocument from './swagger.json';
 import { seed } from './prisma/seed';
 
-const app: Application = express();
+export const app: Application = express();
 
 //seed database with placeholder users
 seed();
