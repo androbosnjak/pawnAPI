@@ -1,8 +1,5 @@
 import { app } from '../app';
 import request from 'supertest';
-import { seed } from '../prisma/seed';
-
-seed();
 
 describe('POST /pawn', () => {
   it('should return 201 & valid response if loan sum is over 100 and customer exists', async () => {
