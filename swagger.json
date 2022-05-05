@@ -102,7 +102,20 @@
             }
           },
           "500": {
-            "description": "server error"
+            "description": "server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "P2025",
+                    "clientVersion": "3.13.0",
+                    "meta": {
+                      "cause": "No 'Customer' record(s) (needed to inline the relation on 'Pawn' record(s)) was found for a nested connect on one-to-many relation 'CustomerToPawn'."
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
