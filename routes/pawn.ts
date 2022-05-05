@@ -1,5 +1,6 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import { PrismaClient } from '@prisma/client';
+import { pawnPostSchema, validate } from '../middleware/validatePawn';
 
 const prisma = new PrismaClient();
 const router = Router();
@@ -11,6 +12,7 @@ interface TypedRequestBody<T> extends Request {
 //submit pawn
 router.post(
   '/',
+  validate(pawnPostSchema),
   async (
     req: TypedRequestBody<{ loanSum: number; customerId: number }>,
     res: Response,
