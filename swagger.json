@@ -1,9 +1,9 @@
 {
-  "openapi": "3.0",
+  "openapi": "3.0.0",
   "info": {
     "version": "1.0.0",
     "title": "Then Pawn Shop API",
-    "description": "API to pawn an item if its value is over 100",
+    "description": "API to for pawn shop to pawn items and monitor expiry dates",
     "license": {
       "name": "MIT",
       "url": "https://opensource.org/licenses/MIT"
@@ -21,43 +21,45 @@
       "description": "API for pawn shop"
     }
   ],
-  "consumes": ["application/json"],
-  "definitions": {
-    "customer": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "number"
-        },
-        "firstName": {
-          "type": "string"
-        },
-        "lastName": {
-          "type": "string"
+  "components": {
+    "schemas": {
+      "customer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          }
         }
-      }
-    },
-    "pawn": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "number"
-        },
-        "loanDate": {
-          "type": "string"
-        },
-        "loanSum": {
-          "type": "number"
-        },
-        "expiryDate": {
-          "type": "string"
-        },
-        "customerId": {
-          "type": "number"
+      },
+      "pawn": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "loanDate": {
+            "type": "string"
+          },
+          "loanSum": {
+            "type": "number"
+          },
+          "expiryDate": {
+            "type": "string"
+          },
+          "customerId": {
+            "type": "number"
+          }
         }
       }
     }
   },
+
   "paths": {
     "/pawn": {
       "post": {
@@ -77,19 +79,25 @@
             }
           }
         },
-        "produces": ["application/json"],
         "responses": {
           "201": {
-            "description": "created",
-            "schema": {
-              "$ref": "#/definitions/pawn"
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/pawn"
+                }
+              }
             }
           },
           "400": {
             "description": "loan sum must be over 100",
-            "schema": {
-              "exmaple": {
-                "message": "loan sum must be over 100"
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "loan sum must be at least 100"
+                }
               }
             }
           },

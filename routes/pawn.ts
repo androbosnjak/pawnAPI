@@ -10,7 +10,7 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
 
   //sum must be over 100 to be accepted
   if (sum < 100) {
-    return res.status(400).json({ message: 'loan sum must be at least 100' });
+    return res.status(400).json({ error: 'loan sum must be at least 100' });
   }
 
   //submit pawn to database
