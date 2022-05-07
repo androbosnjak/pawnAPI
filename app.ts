@@ -20,4 +20,4 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/pawn', pawnRoutes);
 
-app.listen(3001, () => console.log('API is running on port 3000'));
+app.listen(3000, () => console.log('API is running on port 3000'));

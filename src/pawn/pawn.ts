@@ -1,7 +1,7 @@
+import { pawn } from './pawnSubmitType';
 import { Router, Request, Response, NextFunction } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { validateRequestBody } from 'zod-express-middleware';
-import { z } from 'zod';
 
 const prisma = new PrismaClient();
 const router = Router();
@@ -9,12 +9,7 @@ const router = Router();
 //submit pawn
 router.post(
   '/',
-  validateRequestBody(
-    z.object({
-      loanSum: z.number().int().gte(100),
-      customerId: z.number().int(),
-    })
-  ),
+  validateRequestBody(pawn),
   async (req: Request, res: Response, next: NextFunction) => {
     const { loanSum, customerId } = req.body;
 
