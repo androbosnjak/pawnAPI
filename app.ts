@@ -2,7 +2,7 @@ import express, { Application } from 'express';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import swaggerUi from 'swagger-ui-express';
-import pawnRoutes from './routes/pawn';
+import pawnRoutes from './src/pawn/pawn';
 import * as swaggerDocument from './swagger.json';
 import { seed } from './prisma/seed';
 
@@ -20,4 +20,4 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/pawn', pawnRoutes);
 
-app.listen(3000, () => console.log('API is running on port 3000'));
+app.listen(3001, () => console.log('API is running on port 3000'));
