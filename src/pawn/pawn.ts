@@ -11,6 +11,7 @@ router.post(
   '/',
   validateRequestBody(pawn),
   async (req: Request, res: Response, next: NextFunction) => {
+    // middleware will check for types and if loanSum is eqaul to or greater than 100 and call next
     const { loanSum, customerId } = req.body;
 
     //submit pawn to database

@@ -10,7 +10,7 @@ describe('POST /pawn', () => {
     expect(response.statusCode).toEqual(201);
   });
 
-  it('should return 400 and error message if loan sum is under 100', async () => {
+  it('should return 400 and error message if loan sum is under 100 or the parameter is wrong type', async () => {
     const response = await request(app)
       .post('/pawn')
       .send({ loanSum: 99, customerId: 1 });
