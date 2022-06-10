@@ -25,4 +25,11 @@ describe('POST /pawn', () => {
 
     expect(response.statusCode).toEqual(500);
   });
+  it('should return 400 and error if wrong type is sent as loanSum', async () => {
+    const response = await request(app)
+      .post('/pawn')
+      .send({ loanSum: '101', customerId: 7 });
+
+    expect(response.statusCode).toEqual(400);
+  });
 });
